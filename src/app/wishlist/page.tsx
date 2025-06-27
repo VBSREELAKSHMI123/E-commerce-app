@@ -1,8 +1,9 @@
+import WishlistView from '@/coreComponents/WishlistView'
 import React from 'react'
 
 const page = () => {
   return (
-    <div>page</div>
+    <WishlistView />
   )
 }
 
