@@ -1,12 +1,14 @@
-'use client';
+"use client";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {addToCart} from "./redux/slices/CartReducer";
-import {addToWishlist,removeFromWishlist} from "./redux/slices/WishlistReducer";
+import { addToCart } from "./redux/slices/CartReducer";
+import {
+  addToWishlist,
+  removeFromWishlist,
+} from "./redux/slices/WishlistReducer";
 import { IoCartOutline } from "react-icons/io5";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
-import  ProductType  from "../coreComponents/redux/slices/WishlistReducer";
-import {addProducts} from './redux/slices/ProductReducer'
+import { addProducts} from "./redux/slices/ProductReducer";
 
 import {
   Box,
@@ -23,38 +25,32 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./redux/store";
 import { useRouter } from "next/navigation";
 
-
-interface ProductType {
+interface Product {
   id: number;
   title: string;
   price: number;
-  image: string;
-  thumbnail: string;
   rating: number;
+  thumbnail: string;
 }
 
-export default function ProductView() {
-    const [products, setProducts] = useState<ProductType[]>([]);
-  const dispatch = useDispatch()
-  const wishlist = useSelector((state: RootState) => state.wishlist.items) ?? []
-  const router = useRouter()
- 
-
+const SearchPage = ({ query }: { query: string }) => {
+  const [results, setResults] = useState<Product[]>([]);
+  const dispatch = useDispatch();
+    const wishlist = useSelector((state: RootState) => state.wishlist.items) ?? []
+    const router = useRouter()
 
   useEffect(() => {
-    axios
-      .get("https://dummyjson.com/products")
-      .then((response) => {
-        setProducts(response.data.products);
-        dispatch(addProducts(response.data.products));
-        console.log("products stored in redux", response.data.products);
-        
-  console.log("productitems from Redux:", response.data.products);
-  console.log("Is Array:", Array.isArray(response.data.products));
-      })
-      .catch((error) => console.error("Error fetching products:", error));
-  }, []);
-
+    if (query) {
+      axios
+        .get(`https://dummyjson.com/products/search?q=${query}`)
+        .then((res) => {
+          setResults(res.data.products || []);
+          dispatch(addProducts(res.data.products));
+          console.log("products stored in redux", res.data.products);
+        })
+        .catch((err) => console.error("Search error:", err));
+    }
+  }, [query]);
 
   return (
     <Box
@@ -69,7 +65,7 @@ export default function ProductView() {
         padding: 4,
       }}
     >
-      {products.map((product) => {
+      {results.map((product) => {
         const isWishList = wishlist.find((item) => item.id === product.id);
 
         return (
@@ -119,24 +115,10 @@ export default function ProductView() {
                 ₹ {product.price}
               </Typography>
               <Box sx={{ display: "flex", alignItems: "center", mt: 1 }}>
-                <Rating
-                  value={
-                    typeof product.rating === "number"
-                      ? product.rating
-                      : product.rating.rate
-                  }
-                  readOnly
-                />
-                <Typography variant="body2" sx={{ ml: 1 }}>
-                  (
-                  {typeof product.rating === "object" && product.rating.count
-                    ? `(${product.rating.count})`
-                    : ""}
-                  )
-                </Typography>
-                <Typography variant="body2" sx={{ ml: 1 }}>
-                  ({product.rating.count})
-                </Typography>
+                <Rating  value={typeof product.rating === "number" ? product.rating : product.rating.rate} readOnly />
+                {/* <Typography variant="body2" sx={{ ml: 1 }}>
+                  ({product.})
+                </Typography> */}
               </Box>
             </CardContent>
             <CardActions sx={{ p: 2, pt: 0 }}>
@@ -158,4 +140,6 @@ export default function ProductView() {
       })}
     </Box>
   );
-}
+};
+
+export default SearchPage;

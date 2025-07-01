@@ -1,16 +1,26 @@
-'use client';
-import InputField from '@/sharedComponents/InputField';
-import { Box, FormControlLabel,IconButton, Radio, RadioGroup, Typography } from '@mui/material'
-import React, { useEffect, useState } from 'react'
+"use client";
+import InputField from "@/sharedComponents/InputField";
+import {
+  Box,
+  FormControlLabel,
+  IconButton,
+  Radio,
+  RadioGroup,
+  Typography,
+} from "@mui/material";
+import React, { useState } from "react";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
-import { useSelector } from 'react-redux';
-import {ProductType} from '../coreComponents/redux/slices/CartReducer'
-import { RootState } from './redux/store';
-import Image from 'next/image';
-import ProductButton from '../sharedComponents/Button';
+import { useDispatch, useSelector } from "react-redux";
+import { ProductType } from "../coreComponents/redux/slices/CartReducer";
+import { RootState } from "./redux/store";
+import Image from "next/image";
+import ProductButton from "../sharedComponents/Button";
 import * as Yup from "yup";
 import { useFormik } from "formik";
+import { placeOrder } from "../coreComponents/redux/slices/OrderReducer";
+import { clearCart } from "../coreComponents/redux/slices/CartReducer";
+import { useRouter } from "next/navigation";
 
 const checkoutSchema = Yup.object({
   name: Yup.string().required("Name must be Filled"),
@@ -19,42 +29,65 @@ const checkoutSchema = Yup.object({
   phone: Yup.string()
     .required("Phone number must be filled")
     .matches(/^[0-9]{10}$/, "Phone number must be 10 digits"),
-  email:Yup.string().required("Email must be filled").email()
+  email: Yup.string().required("Email must be filled").email(),
 });
 
 const Checkout = () => {
-    const [mark, setMark] = useState(false)
-  const cartitems: ProductType[] = useSelector((state: RootState) => state.cart.item)
+  const router = useRouter()
+  const [mark, setMark] = useState(false);
+  const cartitems: ProductType[] = useSelector(
+    (state: RootState) => state.cart.item
+  );
   const totalAmount = cartitems.reduce((acc, item) => acc + item.price, 0);
-  // const [formValues,setFormValues] = useState("")
-  
+
+  const dispatch = useDispatch();
+
   const formik = useFormik({
     initialValues: {
       name: "",
       address: "",
       city: "",
       phone: "",
-      email:""
+      email: "",
     },
 
     validationSchema: checkoutSchema,
     onSubmit: (values) => {
-          console.log("Form submitted with: ", values);
-        }
+      console.log("Form submitted with: ", values);
+    },
+  });
 
-  })
-    
-    useEffect(() => {
-        console.log("cart items: ",cartitems)
-    },[])
+  const handlePlaceOrder = () => {
+    if (cartitems.length === 0) {
+      return;
+    }
+
+    dispatch(
+      placeOrder({
+        items: cartitems,
+        customers: 
+          {
+            name: formik.values.name,
+            address: formik.values.address,
+            city: formik.values.city,
+            phone: formik.values.phone,
+            email: formik.values.email,
+          },
+        
+      })
+    );
+    alert("Place Order")
+    dispatch(clearCart());
+  
+  };
+
+
 
   return (
-    <Box sx={{ marginTop: "40px", mb: 5,ml:5 }}>
+    <Box sx={{ marginTop: "40px", mb: 5, ml: 5 }}>
       <Box
         sx={{
           display: "flex",
-          // alignItems: "center",
-          // justifyContent: "center",
           gap: 10,
         }}
       >
@@ -183,7 +216,7 @@ const Checkout = () => {
               <Image
                 height={60}
                 width={60}
-                src={list.image}
+                src={list.image || list.thumbnail}
                 alt="list.image"
                 style={{ marginRight: 2 }}
               />
@@ -239,13 +272,21 @@ const Checkout = () => {
               />
             </RadioGroup>
           </Box>
-          <ProductButton color="#DB4444" textcolor="white">
-            Place Order
+
+          <ProductButton
+            textcolor="white"
+            color="#DB4444"
+            onClick={() => {
+              handlePlaceOrder();
+              router.push("/dashboard");
+            }}
+          >
+            place order
           </ProductButton>
         </Box>
       </Box>
     </Box>
   );
-}
+};
 
-export default Checkout
+export default Checkout;

@@ -1,9 +1,9 @@
-import SignInPage from '@/coreComponents/SignInPage'
+import ContactUs from '@/coreComponents/ContactUs'
 import React from 'react'
 
 const page = () => {
   return (
-    <SignInPage />
+    <ContactUs />
   )
 }
 

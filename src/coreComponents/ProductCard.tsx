@@ -1,3 +1,4 @@
+'use client';
 import { Radio } from "@mui/material";
 import {
   Box,

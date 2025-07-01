@@ -55,7 +55,7 @@ const WishlistView = () => {
 
         <CardMedia
           component="img"
-          image={list.image}
+          image={list.image || list.thumbnail}
           height={200}
           alt={list.title}
           sx={{ objectFit: "contain", p: 2 }}
@@ -68,10 +68,11 @@ const WishlistView = () => {
             ₹ {list.price}
           </Typography>
           <Box sx={{ display: "flex", alignItems: "center", mt: 1 }}>
-            <Rating value={list.rating.rate} precision={0.1} readOnly />
-            <Typography variant="body2" sx={{ ml: 1 }}>
+            <Rating value={typeof list.rating === "number" ? list.rating : list.rating.rate}
+ readOnly />
+            {/* <Typography variant="body2" sx={{ ml: 1 }}>
               ({list.rating.count})
-            </Typography>
+            </Typography> */}
           </Box>
         </CardContent>
         <CardActions sx={{ p: 2, pt: 0 }}>

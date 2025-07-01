@@ -4,15 +4,15 @@ export interface ProductType {
   id: number;
   title: string;
   price: number;
-  image: string;
-  rating: {
-    rate: number;
-    count: number;
-  };
+  image?: string;
+  thumbnail?: string;
+  rating: number | { rate: number; count?: number };
 }
 
+
+
 interface WishlistState {
-  items: ProductType[];
+  items: ProductType[] 
 }
 
 const initialState: WishlistState = {

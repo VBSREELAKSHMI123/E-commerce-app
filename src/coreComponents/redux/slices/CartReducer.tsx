@@ -4,17 +4,15 @@ interface ProductType {
   id: number;
   title: string;
   price: number;
-  image: string;
-  rating: {
-    rate: number;
-    count: number;
-  };
+  image?: string;
+  thumbnail?: string;
+  rating: number | { rate: number; count?: number };
 }
 
 const cartSlice = createSlice({
   name: "cart",
   initialState: {
-    item: [] as ProductType[]
+    item: [] as ProductType[],
   },
   reducers: {
     addToCart: (state, action: PayloadAction<ProductType>) => {
@@ -26,10 +24,13 @@ const cartSlice = createSlice({
         (product) => product.id !== action.payload
       );
     },
-
+    clearCart: (state) => {
+      state.item = [];
+      console.log("Cart Cleared and stored to order history")
+    },
   },
 });
 
-export const { addToCart, removeFromCart } = cartSlice.actions;
+export const { addToCart, removeFromCart,clearCart } = cartSlice.actions;
 export default cartSlice.reducer;
 export type { ProductType };

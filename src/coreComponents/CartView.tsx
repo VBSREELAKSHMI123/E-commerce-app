@@ -9,13 +9,16 @@ import {
   CardContent,
   Rating,
   IconButton,
-  Divider,
+ 
 } from "@mui/material";
 import { ProductType } from "../coreComponents/redux/slices/CartReducer";
 import { removeFromCart } from "../coreComponents/redux/slices/CartReducer";
 import { MdDelete } from "react-icons/md";
+import ProductButton from "@/sharedComponents/Button";
+import { useRouter } from "next/navigation";
 
 const CartView = () => {
+  const router = useRouter()
   const cartItems: ProductType[] = useSelector(
     (state: RootState) => state.cart.item
   );
@@ -23,21 +26,27 @@ const CartView = () => {
   console.log("card items:", cartItems);
   return (
     <Box>
-      <Typography
-        variant="h4"
-        sx={{
-          fontWeight: "bold",
-          textAlign: "center",
-          color: "#333",
-          mt: 6,
-          mb: 1,
-        }}
-      >
-        🛒 Your Cart ({cartItems.length}{" "}
-        {cartItems.length === 1 ? "Item" : "Items"})
-      </Typography>
+      <Box sx={{ position: "relative", mt: 5 }}>
+        <Box sx={{ position: "absolute", top: 0, right: 15 }}>
+          <ProductButton textcolor="white" color="#DB4444" onClick={()=>router.push('/checkout')}>
+            Checkout
+          </ProductButton>
+        </Box>
 
-      <Divider sx={{ width: "50%", margin: "0 auto 30px" }} />
+        <Typography
+          variant="h4"
+          sx={{
+            fontWeight: "bold",
+            color: "#333",
+            textAlign: "center",
+          }}
+        >
+          🛒 Your Cart ({cartItems.length}{" "}
+          {cartItems.length === 1 ? "Item" : "Items"})
+        </Typography>
+      </Box>
+
+      {/* <Divider sx={{ width: "50%", margin: "0 auto 30px" }} /> */}
 
       {cartItems.length === 0 ? (
         <h1>Your Cart is Empty</h1>
@@ -79,7 +88,7 @@ const CartView = () => {
               </IconButton>
               <CardMedia
                 component="img"
-                image={items.image}
+                image={items.image || items.thumbnail}
                 height={200}
                 alt={items.title}
                 sx={{ objectFit: "contain", p: 2 }}
@@ -92,9 +101,20 @@ const CartView = () => {
                   ₹ {items.price}
                 </Typography>
                 <Box sx={{ display: "flex", alignItems: "center", mt: 1 }}>
-                  <Rating value={items.rating.rate} precision={0.1} readOnly />
+                  <Rating
+                    value={
+                      typeof items.rating === "number"
+                        ? items.rating
+                        : items.rating.rate
+                    }
+                    readOnly
+                  />
                   <Typography variant="body2" sx={{ ml: 1 }}>
-                    ({items.rating.count})
+                    (
+                    {typeof items.rating === "object" && items.rating.count
+                      ? `(${items.rating.count})`
+                      : ""}
+                    )
                   </Typography>
                 </Box>
               </CardContent>
