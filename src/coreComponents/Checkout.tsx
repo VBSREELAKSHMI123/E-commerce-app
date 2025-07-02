@@ -15,12 +15,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { ProductType } from "../coreComponents/redux/slices/CartReducer";
 import { RootState } from "./redux/store";
 import Image from "next/image";
-import ProductButton from "../sharedComponents/Button";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { placeOrder } from "../coreComponents/redux/slices/OrderReducer";
 import { clearCart } from "../coreComponents/redux/slices/CartReducer";
 import { useRouter } from "next/navigation";
+import PayWithStripe from "./PayWithStripe";
 
 const checkoutSchema = Yup.object({
   name: Yup.string().required("Name must be Filled"),
@@ -33,7 +33,6 @@ const checkoutSchema = Yup.object({
 });
 
 const Checkout = () => {
-  const router = useRouter()
   const [mark, setMark] = useState(false);
   const cartitems: ProductType[] = useSelector(
     (state: RootState) => state.cart.item
@@ -57,29 +56,29 @@ const Checkout = () => {
     },
   });
 
-  const handlePlaceOrder = () => {
-    if (cartitems.length === 0) {
-      return;
-    }
+  // const handlePlaceOrder = () => {
+  //   if (cartitems.length === 0) {
+  //     return;
+  //   }
 
-    dispatch(
-      placeOrder({
-        items: cartitems,
-        customers: 
-          {
-            name: formik.values.name,
-            address: formik.values.address,
-            city: formik.values.city,
-            phone: formik.values.phone,
-            email: formik.values.email,
-          },
+  //   dispatch(
+  //     placeOrder({
+  //       items: cartitems,
+  //       customers: 
+  //         {
+  //           name: formik.values.name,
+  //           address: formik.values.address,
+  //           city: formik.values.city,
+  //           phone: formik.values.phone,
+  //           email: formik.values.email,
+  //         },
         
-      })
-    );
-    alert("Place Order")
-    dispatch(clearCart());
+  //     })
+  //   );
+  //   alert("Place Order")
+  //   dispatch(clearCart());
   
-  };
+  // };
 
 
 
@@ -273,16 +272,7 @@ const Checkout = () => {
             </RadioGroup>
           </Box>
 
-          <ProductButton
-            textcolor="white"
-            color="#DB4444"
-            onClick={() => {
-              handlePlaceOrder();
-              router.push("/dashboard");
-            }}
-          >
-            place order
-          </ProductButton>
+          <PayWithStripe amount={totalAmount * 100}  name="Cart Total"/>
         </Box>
       </Box>
     </Box>

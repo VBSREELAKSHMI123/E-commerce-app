@@ -1,9 +1,10 @@
 "use client";
+import ProductButton from "@/sharedComponents/Button";
 import InputField from "@/sharedComponents/InputField";
 import { Box, Divider, Typography } from "@mui/material";
-import React from "react"; import { IoCall } from "react-icons/io5";
+import React from "react";
+import { IoCall } from "react-icons/io5";
 import { MdEmail } from "react-icons/md";
-
 
 const ContactUs = () => {
   return (
@@ -63,7 +64,7 @@ const ContactUs = () => {
             flexDirection: "column",
             boxShadow: 3,
             height: 310,
-            width: 550,
+            width: 700,
             boxSizing: "border-box",
             p: 3,
           }}
@@ -118,8 +119,19 @@ const ContactUs = () => {
               }}
             />
           </Box>
-          <Box>form fields 2</Box>
-          <Box>send message button</Box>
+          <Box sx={{ mt: 3 }}>
+            <InputField
+              variant="filled"
+              label="Your Message"
+              sx={{
+                "& .MuiInputBase-root:before": {
+                  borderBottom: "none",
+                },
+                width: 600,
+              }}
+            />
+          </Box>
+          <Box sx={{mt:2}}><ProductButton color="#DB4444" textcolor="white">send message</ProductButton></Box>
         </Box>
       </Box>
     </Box>

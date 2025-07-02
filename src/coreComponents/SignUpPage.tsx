@@ -1,5 +1,5 @@
 "use client";
-import { Box, Typography } from "@mui/material";
+import { Box, Link, Typography } from "@mui/material";
 import InputField from "../sharedComponents/InputField";
 import ProductButton from "../sharedComponents/Button";
 import * as Yup from "yup";
@@ -7,6 +7,7 @@ import { useFormik } from "formik";
 import { registerSuccess } from "../coreComponents/redux/slices/RegisterReducer";
 import { useDispatch } from "react-redux";
 import { FcGoogle } from "react-icons/fc";
+
 
 const formSchema = Yup.object({
   name: Yup.string()
@@ -112,16 +113,18 @@ export default function SignUpPage() {
           <ProductButton color="#DB4444" textcolor="white" type="submit">
             Create Account
           </ProductButton>
-          <ProductButton color="white" textcolor="black" sx={{mt:2}}>
-            <FcGoogle size={18} style={{marginRight:7}}/>
+          <ProductButton color="white" textcolor="black" sx={{ mt: 2 }}>
+            <FcGoogle size={18} style={{ marginRight: 7 }} />
             Sign Up With Google
           </ProductButton>
           <Box sx={{ justifyContent: "space-between", mt: 2 }}>
             <Box component="div" sx={{ display: "inline" }}>
               Already have account?
             </Box>
-            <Box component="div" sx={{ display: "inline",ml:2 }}>
-              Log in
+            <Box component="div" sx={{ display: "inline", ml: 2 }}>
+              <Link href="/signin" underline="none" color="black">
+                Log in
+              </Link>
             </Box>
           </Box>
         </Box>
