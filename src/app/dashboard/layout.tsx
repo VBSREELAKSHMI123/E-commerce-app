@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
-import Sidebar from "@/coreComponents/Sidebar";
-import Navbar from "@/coreComponents/Navbar";
+import Sidebar from "@/ComponentLibrary/Sidebar";
+import Navbar from "@/ComponentLibrary/Navbar";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -13,7 +13,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
           sx={{
             flexGrow: 1,
             padding: 2,
-            marginTop: "40px", 
+            marginTop: "40px",
             overflowX: "hidden",
           }}
         >

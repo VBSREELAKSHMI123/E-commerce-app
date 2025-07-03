@@ -1,6 +1,8 @@
 "use client";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./redux/store";
+import EmptyCart from "@/sharedComponents/EmptyCart"; 
+
 import {
   Box,
   Typography,
@@ -9,16 +11,15 @@ import {
   CardContent,
   Rating,
   IconButton,
- 
 } from "@mui/material";
-import { ProductType } from "../coreComponents/redux/slices/CartReducer";
-import { removeFromCart } from "../coreComponents/redux/slices/CartReducer";
+import { ProductType } from "./redux/slices/CartReducer";
+import { removeFromCart } from "./redux/slices/CartReducer";
 import { MdDelete } from "react-icons/md";
 import ProductButton from "@/sharedComponents/Button";
 import { useRouter } from "next/navigation";
 
 const CartView = () => {
-  const router = useRouter()
+  const router = useRouter();
   const cartItems: ProductType[] = useSelector(
     (state: RootState) => state.cart.item
   );
@@ -28,7 +29,11 @@ const CartView = () => {
     <Box>
       <Box sx={{ position: "relative", mt: 5 }}>
         <Box sx={{ position: "absolute", top: 0, right: 15 }}>
-          <ProductButton textcolor="white" color="#DB4444" onClick={()=>router.push('/checkout')}>
+          <ProductButton
+            textcolor="white"
+            color="#DB4444"
+            onClick={() => router.push("/checkout")}
+          >
             Checkout
           </ProductButton>
         </Box>
@@ -41,15 +46,15 @@ const CartView = () => {
             textAlign: "center",
           }}
         >
-          🛒 Your Cart ({cartItems.length}{" "}
+          Your Cart ({cartItems.length}{" "}
           {cartItems.length === 1 ? "Item" : "Items"})
         </Typography>
       </Box>
 
-      {/* <Divider sx={{ width: "50%", margin: "0 auto 30px" }} /> */}
+   
 
       {cartItems.length === 0 ? (
-        <h1>Your Cart is Empty</h1>
+       <EmptyCart />
       ) : (
         <Box
           sx={{

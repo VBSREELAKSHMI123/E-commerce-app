@@ -1,6 +1,6 @@
-'use client';
+"use client";
 import React from "react";
-import SearchPage from "@/coreComponents/SearchPage";
+import SearchPage from "@/ComponentLibrary/SearchPage";
 import { useSearchParams } from "next/navigation";
 
 const Page = () => {

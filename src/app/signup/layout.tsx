@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import Navbar from "../../coreComponents/Navbar";
+import Navbar from "../../ComponentLibrary/Navbar";
 
 export default function SignUpLayout({
   children,

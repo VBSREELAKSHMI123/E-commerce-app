@@ -1,12 +1,15 @@
-'use client';
+"use client";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {addToCart} from "./redux/slices/CartReducer";
-import {addToWishlist,removeFromWishlist} from "./redux/slices/WishlistReducer";
+import { addToCart } from "./redux/slices/CartReducer";
+import {
+  addToWishlist,
+  removeFromWishlist,
+} from "./redux/slices/WishlistReducer";
 import { IoCartOutline } from "react-icons/io5";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
-import  ProductType  from "../coreComponents/redux/slices/WishlistReducer";
-import {addProducts} from './redux/slices/ProductReducer'
+import ProductType from "./redux/slices/WishlistReducer";
+import { addProducts } from "./redux/slices/ProductReducer";
 
 import {
   Box,
@@ -23,7 +26,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./redux/store";
 import { useRouter } from "next/navigation";
 
-
 interface ProductType {
   id: number;
   title: string;
@@ -34,12 +36,11 @@ interface ProductType {
 }
 
 export default function ProductView() {
-    const [products, setProducts] = useState<ProductType[]>([]);
-  const dispatch = useDispatch()
-  const wishlist = useSelector((state: RootState) => state.wishlist.items) ?? []
-  const router = useRouter()
- 
-
+  const [products, setProducts] = useState<ProductType[]>([]);
+  const dispatch = useDispatch();
+  const wishlist =
+    useSelector((state: RootState) => state.wishlist.items) ?? [];
+  const router = useRouter();
 
   useEffect(() => {
     axios
@@ -48,13 +49,12 @@ export default function ProductView() {
         setProducts(response.data.products);
         dispatch(addProducts(response.data.products));
         console.log("products stored in redux", response.data.products);
-        
-  console.log("productitems from Redux:", response.data.products);
-  console.log("Is Array:", Array.isArray(response.data.products));
+
+        console.log("productitems from Redux:", response.data.products);
+        console.log("Is Array:", Array.isArray(response.data.products));
       })
       .catch((error) => console.error("Error fetching products:", error));
   }, []);
-
 
   return (
     <Box

@@ -1,10 +1,8 @@
-import SignInPage from '@/coreComponents/SignInPage'
-import React from 'react'
+import SignInPage from "@/ComponentLibrary/SignInPage";
+import React from "react";
 
 const page = () => {
-  return (
-    <SignInPage />
-  )
-}
+  return <SignInPage />;
+};
 
-export default page
+export default page;

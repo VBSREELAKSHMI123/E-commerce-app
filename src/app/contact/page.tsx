@@ -1,10 +1,8 @@
-import ContactUs from '@/coreComponents/ContactUs'
-import React from 'react'
+import ContactUs from "@/ComponentLibrary/ContactUs";
+import React from "react";
 
 const page = () => {
-  return (
-    <ContactUs />
-  )
-}
+  return <ContactUs />;
+};
 
-export default page
+export default page;
