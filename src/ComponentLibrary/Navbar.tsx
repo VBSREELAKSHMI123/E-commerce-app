@@ -23,7 +23,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { logout } from "../coreComponents/redux/slices/LoginReducer";
+import { logout } from "./redux/slices/LoginReducer";
 
 interface ProductSuggestion {
   id: number;

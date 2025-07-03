@@ -1,10 +1,8 @@
-import WishlistView from '@/coreComponents/WishlistView'
-import React from 'react'
+import WishlistView from "@/ComponentLibrary/WishlistView";
+import React from "react";
 
 const page = () => {
-  return (
-    <WishlistView />
-  )
-}
+  return <WishlistView />;
+};
 
-export default page
+export default page;

@@ -1,4 +1,4 @@
-import Navbar from "@/coreComponents/Navbar";
+import Navbar from "@/ComponentLibrary/Navbar";
 import React from "react";
 
 const CartLayout = ({ children }: { children: React.ReactNode }) => {

@@ -1,10 +1,8 @@
-import SuccessPage from '@/coreComponents/SuccessPage'
-import React from 'react'
+import SuccessPage from "@/ComponentLibrary/SuccessPage";
+import React from "react";
 
 const page = () => {
-  return (
-    <SuccessPage />
-  )
-}
+  return <SuccessPage />;
+};
 
-export default page
+export default page;

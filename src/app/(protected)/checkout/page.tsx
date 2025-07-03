@@ -1,10 +1,8 @@
-import Checkout from '@/coreComponents/Checkout'
-import React from 'react'
+import Checkout from "@/ComponentLibrary/Checkout";
+import React from "react";
 
 const page = () => {
-  return (
-   <Checkout />
-  )
-}
+  return <Checkout />;
+};
 
-export default page
+export default page;
