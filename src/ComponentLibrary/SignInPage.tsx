@@ -4,9 +4,9 @@ import InputField from "../sharedComponents/InputField";
 import ProductButton from "../sharedComponents/Button";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import {  useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
-import {login} from '../coreComponents/redux/slices/LoginReducer'
+import { login } from "./redux/slices/LoginReducer";
 import { RootState } from "./redux/store";
 
 const formSchema = Yup.object({
@@ -17,8 +17,8 @@ const formSchema = Yup.object({
 });
 
 export default function SignInPage() {
-    const router = useRouter()
-  const dispatch = useDispatch()
+  const router = useRouter();
+  const dispatch = useDispatch();
   const redirectUrl = useSelector((state: RootState) => state.auth.redirectUrl);
 
   const formik = useFormik({
@@ -28,8 +28,8 @@ export default function SignInPage() {
     },
     validationSchema: formSchema,
     onSubmit: (values) => {
-      dispatch(login())
-      router.push(redirectUrl || '/dashboard')
+      dispatch(login());
+      router.push(redirectUrl || "/dashboard");
       console.log(values);
     },
   });

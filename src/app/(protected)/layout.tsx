@@ -1,12 +1,12 @@
-import AuthGaurd from '@/coreComponents/AuthGaurd'
-import React from 'react'
+import AuthGaurd from "@/ComponentLibrary/AuthGaurd";
+import React from "react";
 
-const layout = ({children}:{children:string}) => {
+const layout = ({ children }: { children: string }) => {
   return (
-      <>
-          <AuthGaurd>{children}</AuthGaurd>
-      </>
-  )
-}
+    <>
+      <AuthGaurd>{children}</AuthGaurd>
+    </>
+  );
+};
 
-export default layout
+export default layout;

@@ -4,10 +4,9 @@ import InputField from "../sharedComponents/InputField";
 import ProductButton from "../sharedComponents/Button";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { registerSuccess } from "../coreComponents/redux/slices/RegisterReducer";
+import { registerSuccess } from "./redux/slices/RegisterReducer";
 import { useDispatch } from "react-redux";
 import { FcGoogle } from "react-icons/fc";
-
 
 const formSchema = Yup.object({
   name: Yup.string()

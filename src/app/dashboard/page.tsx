@@ -1,7 +1,7 @@
 import React from "react";
 import "react-multi-carousel/lib/styles.css";
 import { Box } from "@mui/material";
-import DashboardProductList from '../../coreComponents/DashboardProductList'
+import DashboardProductList from "../../ComponentLibrary/DashboardProductList";
 import DashboardCarousel from "../../sharedComponents/DashboardCarousel";
 
 const page = () => {

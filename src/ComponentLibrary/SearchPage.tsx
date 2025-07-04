@@ -50,7 +50,7 @@ const SearchPage = ({ query }: { query: string }) => {
         })
         .catch((err) => console.error("Search error:", err));
     }
-  }, [query]);
+  }, [dispatch, query]);
 
   return (
     <Box
@@ -115,7 +115,7 @@ const SearchPage = ({ query }: { query: string }) => {
                 ₹ {product.price}
               </Typography>
               <Box sx={{ display: "flex", alignItems: "center", mt: 1 }}>
-                <Rating  value={typeof product.rating === "number" ? product.rating : product.rating.rate} readOnly />
+                <Rating  value={product.rating} readOnly />
                 {/* <Typography variant="body2" sx={{ ml: 1 }}>
                   ({product.})
                 </Typography> */}

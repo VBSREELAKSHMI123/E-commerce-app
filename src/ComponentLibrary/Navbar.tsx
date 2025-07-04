@@ -23,7 +23,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { logout } from "../coreComponents/redux/slices/LoginReducer";
+import { logout } from "../ComponentLibrary/redux/slices/LoginReducer";
 
 interface ProductSuggestion {
   id: number;
@@ -190,21 +190,29 @@ export default function Navbar() {
                   </List>
                 </Paper>
               )}
-              <Box>
-                <IoHeartOutline
-                  color="black"
-                  size={20}
-                  cursor="pointer"
-                  onClick={() => router.push("/wishlist")}
-                />
-              </Box>
-              <Box>
-                <IoCartOutline
-                  color="black"
-                  size={20}
-                  cursor="pointer"
-                  onClick={() => router.push("/cartlist")}
-                />
+              <Box
+                sx={{
+                  display: { xs: "none", md: "flex" },
+                  alignItems: "center",
+                  gap: 2,
+                }}
+              >
+                <Box>
+                  <IoHeartOutline
+                    color="black"
+                    size={20}
+                    cursor="pointer"
+                    onClick={() => router.push("/wishlist")}
+                  />
+                </Box>
+                <Box>
+                  <IoCartOutline
+                    color="black"
+                    size={20}
+                    cursor="pointer"
+                    onClick={() => router.push("/cartlist")}
+                  />
+                </Box>
               </Box>
               <Box>
                 <IconButton onClick={handleMenuOpen}>
@@ -224,6 +232,22 @@ export default function Navbar() {
                   horizontal: "right",
                 }}
               >
+                <MenuItem
+                  onClick={() => {
+                    handleMenuClose();
+                    router.push("/wishlist");
+                  }}
+                >
+                  Wishlist
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    handleMenuClose();
+                    router.push("/cartlist");
+                  }}
+                >
+                  Cart
+                </MenuItem>
                 <MenuItem
                   onClick={() => {
                     handleMenuClose();

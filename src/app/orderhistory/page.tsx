@@ -1,9 +1,9 @@
-import CancelPage from '@/ComponentLibrary/CancelPage'
+import OrderHistory from '@/ComponentLibrary/OrderHistory'
 import React from 'react'
 
 const page = () => {
   return (
-    <CancelPage />
+    <OrderHistory />
   )
 }
 

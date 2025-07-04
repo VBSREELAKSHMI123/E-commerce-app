@@ -42,8 +42,9 @@ const DashboardCarousel = () => {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              height: 200,
-              
+              height: { xs: 100, sm: 130, md: 180 }, 
+              maxWidth: { xs: 350, sm: 400, md: 600 },
+              mx: "auto",
             }}
           >
             <Image

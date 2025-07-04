@@ -1,10 +1,8 @@
-import SignUpPage from '@/coreComponents/SignUpPage'
-import React from 'react'
+import SignUpPage from "@/ComponentLibrary/SignUpPage";
+import React from "react";
 
 const page = () => {
-  return (
-    <SignUpPage />
-  )
-}
+  return <SignUpPage />;
+};
 
-export default page
+export default page;

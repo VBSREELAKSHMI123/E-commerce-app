@@ -1,26 +1,39 @@
-'use client';
-import { Box, Button, Card, CardActions, CardContent, CardMedia, IconButton, Rating, Typography } from '@mui/material';
-import {ProductType} from '../coreComponents/redux/slices/ProductReducer'
-import { RootState } from './redux/store';
-import { useDispatch, useSelector } from 'react-redux';
-import {addToWishlist,removeFromWishlist} from './redux/slices/WishlistReducer'
-import {addToCart} from './redux/slices/CartReducer'
-import { useRouter } from 'next/navigation';
-import { Favorite, FavoriteBorder } from '@mui/icons-material';
-import { IoCartOutline } from 'react-icons/io5';
-import ProductButton from '@/sharedComponents/Button';
+"use client";
+import {
+  Box,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  IconButton,
+  Rating,
+  Typography,
+} from "@mui/material";
+import { ProductType } from "./redux/slices/ProductReducer";
+import { RootState } from "./redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addToWishlist,
+  removeFromWishlist,
+} from "./redux/slices/WishlistReducer";
+import { addToCart } from "./redux/slices/CartReducer";
+import { useRouter } from "next/navigation";
+import { Favorite, FavoriteBorder } from "@mui/icons-material";
+import { IoCartOutline } from "react-icons/io5";
+import ProductButton from "@/sharedComponents/Button";
 
 const DashboardProductList = () => {
-  const router = useRouter()
+  const router = useRouter();
   const productitems: ProductType[] =
     useSelector((state: RootState) => state.products.product) || [];
 
-
   console.log("productitems from Redux:", productitems);
   console.log("Is Array:", Array.isArray(productitems));
-     const wishlist = useSelector((state: RootState) => state.wishlist.items) ?? []
- 
-    const dispatch = useDispatch()
+  const wishlist =
+    useSelector((state: RootState) => state.wishlist.items) ?? [];
+
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -74,6 +87,7 @@ const DashboardProductList = () => {
                 >
                   <CardMedia
                     component="img"
+                    
                     image={product.image || product.thumbnail}
                     alt={product.title}
                     sx={{
@@ -130,13 +144,19 @@ const DashboardProductList = () => {
           })}
         </Box>
       </Box>
-      <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <ProductButton color="#DB4444" textcolor="white" onClick={()=>router.push('/productlist')}>
+      <Box
+        sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+      >
+        <ProductButton
+          color="#DB4444"
+          textcolor="white"
+          onClick={() => router.push("/productlist")}
+        >
           view products
         </ProductButton>
       </Box>
     </>
   );
-}
+};
 
-export default DashboardProductList
+export default DashboardProductList;

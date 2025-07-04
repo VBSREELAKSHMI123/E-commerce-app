@@ -8,18 +8,16 @@ import {
   RadioGroup,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
-import { useDispatch, useSelector } from "react-redux";
-import { ProductType } from "../coreComponents/redux/slices/CartReducer";
+import {  useSelector } from "react-redux";
+import { ProductType } from "./redux/slices/CartReducer";
 import { RootState } from "./redux/store";
 import Image from "next/image";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { placeOrder } from "../coreComponents/redux/slices/OrderReducer";
-import { clearCart } from "../coreComponents/redux/slices/CartReducer";
-import { useRouter } from "next/navigation";
+
 import PayWithStripe from "./PayWithStripe";
 
 const checkoutSchema = Yup.object({
@@ -39,7 +37,7 @@ const Checkout = () => {
   );
   const totalAmount = cartitems.reduce((acc, item) => acc + item.price, 0);
 
-  const dispatch = useDispatch();
+
 
   const formik = useFormik({
     initialValues: {
@@ -64,7 +62,7 @@ const Checkout = () => {
   //   dispatch(
   //     placeOrder({
   //       items: cartitems,
-  //       customers: 
+  //       customers:
   //         {
   //           name: formik.values.name,
   //           address: formik.values.address,
@@ -72,15 +70,18 @@ const Checkout = () => {
   //           phone: formik.values.phone,
   //           email: formik.values.email,
   //         },
-        
+
   //     })
   //   );
   //   alert("Place Order")
   //   dispatch(clearCart());
-  
+
   // };
 
-
+  useEffect(() => {
+    sessionStorage.setItem("customerInfo", JSON.stringify(formik.values));
+    sessionStorage.setItem("cartItems", JSON.stringify(cartitems));
+  }, [formik.values, cartitems]);
 
   return (
     <Box sx={{ marginTop: "40px", mb: 5, ml: 5 }}>
@@ -194,7 +195,8 @@ const Checkout = () => {
             </Box>
             <Box>
               <Typography>
-                Save this information for faster check-out next time
+                Save this information for faster check-out <br></br>
+                next time
               </Typography>
             </Box>
           </Box>
@@ -215,7 +217,7 @@ const Checkout = () => {
               <Image
                 height={60}
                 width={60}
-                src={list.image || list.thumbnail}
+                src={list.image || list.thumbnail || "/images/Frame 922.png"}
                 alt="list.image"
                 style={{ marginRight: 2 }}
               />
@@ -272,7 +274,7 @@ const Checkout = () => {
             </RadioGroup>
           </Box>
 
-          <PayWithStripe amount={totalAmount * 100}  name="Cart Total"/>
+          <PayWithStripe amount={totalAmount * 100} name="Cart Total" />
         </Box>
       </Box>
     </Box>

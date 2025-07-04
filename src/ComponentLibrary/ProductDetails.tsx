@@ -6,6 +6,8 @@ import axios from "axios";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import {addToCart} from '../ComponentLibrary/redux/slices/CartReducer'
 
 interface ProductType {
   id: number;
@@ -21,6 +23,7 @@ const ProductDetails = () => {
   const [product, setProduct] = useState<ProductType | null>();
   const params = useParams();
   const id = params.id;
+  const dispatch = useDispatch()
 
   const fetchProduct = async (id: string) => {
     const response = await axios.get(`https://dummyjson.com/products/${id}`);
@@ -166,7 +169,7 @@ const ProductDetails = () => {
                   justifyContent: "center",
                   border: 1,
                   p: 1,
-                  bgcolor: "#DB4444",
+                  bgcolor: "black",
                   color: "white",
                 }}
               >
@@ -200,15 +203,23 @@ const ProductDetails = () => {
                 <Box sx={{ border: 1, p: 1 }}>-</Box>
                 <Box sx={{ border: 1, p: 1 }}>2</Box>
                 <Box
-                  sx={{ border: 1, bgcolor: "#DB4444", color: "white", p: 1 }}
+                  sx={{ border: 1, bgcolor: "black", color: "white", p: 1 }}
                 >
                   +
                 </Box>
               </Box>
 
               <Box>
-                <ProductButton color="#DB4444" textcolor="white">
-                  Buy Now
+                <ProductButton
+                  color="black"
+                  textcolor="white"
+                  onClick={() => {
+                    if (product) {
+                      dispatch(addToCart(product));
+                    }
+                  }}
+                >
+                  Add to Cart
                 </ProductButton>
               </Box>
 
