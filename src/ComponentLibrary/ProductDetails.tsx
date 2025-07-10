@@ -37,7 +37,7 @@ const ProductDetails = () => {
   const id = params.id;
   const dispatch = useDispatch();
   const wishlist = useSelector((state:RootState)=>state.wishlist.items)
-  const isWishList = wishlist.find((item)=>item.id === product?.id)
+
 
   const fetchProduct = async (id: string) => {
     const response = await axios.get(`https://dummyjson.com/products/${id}`);
