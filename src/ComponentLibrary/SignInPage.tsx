@@ -35,12 +35,12 @@ export default function SignInPage() {
     },
   });
   return (
-    <Box sx={{ display: "flex", height: "100vh" }}>
+    <Box sx={{ display: "flex", height: "100vh", overflow: "hidden" }}>
       <Box
         component="img"
         src="/images/Signup_image.png"
         alt="signup"
-        sx={{ maxHeight: 500, flex: 1 }}
+        sx={{ maxHeight: 450, flex: 1, maxWidth: 500,mt:5,ml:2 }}
       />
 
       <Box
@@ -71,7 +71,7 @@ export default function SignInPage() {
           <InputField
             defaultValue="Email or Phone Number"
             placeholder="Email"
-            sx={{ mb: 4, input: { color: "gray" } }}
+            sx={{  mb: formik.touched.email && formik.errors.email ? 1 : 4, input: { color: "gray" } }}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.email}
@@ -86,7 +86,7 @@ export default function SignInPage() {
           <InputField
             defaultValue="Password"
             placeholder="Password"
-            sx={{ mb: 4, input: { color: "gray" } }}
+            sx={{ mb: formik.touched.email && formik.errors.email ? 1 : 4, input: { color: "gray" } }}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.password}
@@ -109,7 +109,7 @@ export default function SignInPage() {
               Log In
             </ProductButton>
             <Typography variant="body2" sx={{ color: "#DB4444" }}>
-              Forget Password?
+              Forgot Password?
             </Typography>
           </Box>
         </Box>

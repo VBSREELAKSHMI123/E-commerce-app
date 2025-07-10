@@ -1,13 +1,25 @@
 "use client";
 import ProductButton from "@/sharedComponents/Button";
-import { FavoriteBorder } from "@mui/icons-material";
-import { Box, Divider, FormControlLabel, Radio, RadioGroup, Rating, Typography } from "@mui/material";
+import { Favorite, FavoriteBorder } from "@mui/icons-material";
+import { addToWishlist,removeFromWishlist } from "./redux/slices/WishlistReducer";
+import {
+  Box,
+  Divider,
+  FormControlLabel,
+  IconButton,
+  Radio,
+  RadioGroup,
+  Rating,
+  Typography,
+} from "@mui/material";
 import axios from "axios";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import {addToCart} from '../ComponentLibrary/redux/slices/CartReducer'
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../ComponentLibrary/redux/slices/CartReducer";
+import { RootState } from "./redux/store";
+
 
 interface ProductType {
   id: number;
@@ -16,14 +28,16 @@ interface ProductType {
   image?: string;
   thumbnail?: string;
   description: string;
-  rating: number ;
+  rating: number;
 }
 
 const ProductDetails = () => {
   const [product, setProduct] = useState<ProductType | null>();
   const params = useParams();
   const id = params.id;
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const wishlist = useSelector((state:RootState)=>state.wishlist.items)
+  const isWishList = wishlist.find((item)=>item.id === product?.id)
 
   const fetchProduct = async (id: string) => {
     const response = await axios.get(`https://dummyjson.com/products/${id}`);
@@ -106,7 +120,8 @@ const ProductDetails = () => {
           </Box>
           <Box sx={{ display: "flex", alignItems: "center", mt: 1 }}>
             <Rating
-              value={product?.rating}
+              value={Number(product?.rating) || 0}
+              precision={0.5}
               readOnly
             />
             {/* <Typography variant="body2" sx={{ ml: 1 }}>
@@ -198,9 +213,7 @@ const ProductDetails = () => {
               <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
                 <Box sx={{ border: 1, p: 1 }}>-</Box>
                 <Box sx={{ border: 1, p: 1 }}>2</Box>
-                <Box
-                  sx={{ border: 1, bgcolor: "black", color: "white", p: 1 }}
-                >
+                <Box sx={{ border: 1, bgcolor: "black", color: "white", p: 1 }}>
                   +
                 </Box>
               </Box>
@@ -219,9 +232,32 @@ const ProductDetails = () => {
                 </ProductButton>
               </Box>
 
-              <Box sx={{ border: 1, p: 1 }}>
-                <FavoriteBorder />
-              </Box>
+              {product && (
+                <IconButton
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (!product) return;
+
+                    const isWishList = wishlist.some(
+                      (item) => item.id === product.id
+                    );
+
+                    dispatch(
+                      isWishList
+                        ? removeFromWishlist(product.id)
+                        : addToWishlist(product)
+                    );
+                  }}
+                  sx={{color:"black"}}
+                >
+                  {wishlist.some((item) => item.id === product.id) ? (
+                    <Favorite />
+                  ) : (
+                    <FavoriteBorder />
+                  )}
+                  
+                </IconButton>
+              )}
             </Box>
           </Box>
           <Box
