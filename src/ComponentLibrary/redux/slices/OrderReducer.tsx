@@ -13,7 +13,7 @@ interface CustomerType {
   name: string;
   address: string;
   city: string;
-  phone: string;
+  phone: number;
   email: string;
 }
 
@@ -47,8 +47,16 @@ const OrderSlice = createSlice({
       state.orders.push(newOrder);
       console.log("Stored to Order Slice", newOrder);
     },
+
+    deleteOrder: (state, action: PayloadAction<number>) => {
+      state.orders = state.orders.filter(
+        (order) => order.id !== action.payload
+      );
+      console.log("order deleted: ",state.orders)
+    },
   },
 });
 
-export const { placeOrder } = OrderSlice.actions;
+export const { placeOrder,deleteOrder } = OrderSlice.actions;
 export default OrderSlice.reducer;
+export type { OrderType, CustomerType };

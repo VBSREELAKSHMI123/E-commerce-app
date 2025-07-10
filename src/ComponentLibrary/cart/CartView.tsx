@@ -1,21 +1,14 @@
 "use client";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "./redux/store";
-import {
-  Box,
-  Typography,
-  Card,
-  CardMedia,
-  CardContent,
-  Rating,
-  IconButton,
-} from "@mui/material";
-import { ProductType } from "./redux/slices/CartReducer";
-import { removeFromCart } from "./redux/slices/CartReducer";
+import { RootState } from "../redux/store";
+import {Box,Typography,Card,CardMedia,CardContent,Rating,IconButton} from "@mui/material";
+import { ProductType } from "../redux/slices/CartReducer";
+import { removeFromCart } from "../redux/slices/CartReducer";
 import { MdDelete } from "react-icons/md";
-import ProductButton from "@/sharedComponents/Button";
+import ProductButton from "../../sharedComponents/Button";
 import { useRouter } from "next/navigation";
-import EmptyCart from "@/sharedComponents/EmptyCart";
+import EmptyCart from "../../sharedComponents/EmptyCart";
 
 const CartView = () => {
   const router = useRouter();
@@ -45,7 +38,7 @@ const CartView = () => {
             textAlign: "center",
           }}
         >
-           Your Cart ({cartItems.length}{" "}
+          Your Cart ({cartItems.length}{" "}
           {cartItems.length === 1 ? "Item" : "Items"})
         </Typography>
       </Box>
@@ -78,6 +71,7 @@ const CartView = () => {
             >
               <IconButton
                 onClick={() => dispatch(removeFromCart(items.id))}
+                aria-label="delete item"
                 sx={{
                   position: "absolute",
                   top: 8,
@@ -90,7 +84,7 @@ const CartView = () => {
               </IconButton>
               <CardMedia
                 component="img"
-                image={items.image || items.thumbnail}
+                image={items.thumbnail}
                 height={200}
                 alt={items.title}
                 sx={{ objectFit: "contain", p: 2 }}
@@ -99,25 +93,18 @@ const CartView = () => {
                 <Typography variant="subtitle1" noWrap>
                   {items.title}
                 </Typography>
-                <Typography variant="body1" sx={{ mt: 1 }}>
+                <Typography  variant="body1" sx={{ mt: 1 }}>
                   ₹ {items.price}
                 </Typography>
                 <Box sx={{ display: "flex", alignItems: "center", mt: 1 }}>
-                  <Rating
-                    value={
-                      typeof items.rating === "number"
-                        ? items.rating
-                        : items.rating.rate
-                    }
-                    readOnly
-                  />
-                  <Typography variant="body2" sx={{ ml: 1 }}>
+                  <Rating value={items.rating} readOnly />
+                  {/* <Typography variant="body2" sx={{ ml: 1 }}>
                     (
                     {typeof items.rating === "object" && items.rating.count
                       ? `(${items.rating.count})`
                       : ""}
                     )
-                  </Typography>
+                  </Typography> */}
                 </Box>
               </CardContent>
             </Card>

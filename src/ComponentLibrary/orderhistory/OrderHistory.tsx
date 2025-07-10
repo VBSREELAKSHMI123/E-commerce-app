@@ -8,16 +8,20 @@ import {
   Avatar,
 } from "@mui/material";
 import { useSelector } from "react-redux";
-
+import React from "react";
 import dayjs from "dayjs";
-import { RootState } from './redux/store';
+import { RootState } from "../redux/store";
 
 export default function OrderHistory() {
-  const orders = useSelector((state:RootState) => state.order.orders);
+  const orders = useSelector((state: RootState) => state.order.orders);
 
   return (
     <Box sx={{ p: 4 }}>
-      <Typography variant="h4" mb={4} sx={{display:"flex",justifyContent:"center"}}>
+      <Typography
+        variant="h4"
+        mb={4}
+        sx={{ display: "flex", justifyContent: "center" }}
+      >
         Order History
       </Typography>
 
@@ -39,11 +43,11 @@ export default function OrderHistory() {
                 mb: 2,
               }}
             >
-              <Typography variant="subtitle2">
+              <Typography variant="subtitle2" data-testid="order-id">
                 <strong>Order ID:</strong> {order.id}
               </Typography>
-              <Typography variant="subtitle2">
-                <strong>Placed On:</strong> {orderDate.format("DD/MM/YYYY")}
+              <Typography variant="subtitle2" data-testid="order-date">
+                <strong>Placed On:</strong> {orderDate.format("MM/DD/YYYY")}
               </Typography>
             </Box>
 
@@ -60,11 +64,7 @@ export default function OrderHistory() {
                   >
                     <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
                       <Avatar
-                        src={
-                          item.image ||
-                          item.thumbnail ||
-                          "/images/placeholder.png"
-                        }
+                        src={item.thumbnail}
                         alt={item.title}
                         sx={{ width: 50, height: 50 }}
                       />
@@ -72,7 +72,10 @@ export default function OrderHistory() {
                         <Typography variant="subtitle1">
                           {item.title}
                         </Typography>
-                        <Typography color="text.secondary">
+                        <Typography
+                          color="text.secondary"
+                          data-testid="item-price"
+                        >
                           ₹ {item.price}
                         </Typography>
                       </Box>
@@ -90,11 +93,11 @@ export default function OrderHistory() {
                 mt: 2,
               }}
             >
-              <Typography variant="subtitle1">
+              <Typography variant="subtitle1" data-testid="order-total">
                 <strong>Total:</strong> ₹ {totalAmount}
               </Typography>
-              <Typography variant="subtitle1">
-                <strong>Delivery:</strong> {deliveryDate.format("DD/MM/YYYY")}
+              <Typography variant="subtitle1" data-testid="order-delivery">
+                <strong>Delivery:</strong> {deliveryDate.format("MM/DD/YYYY")}
               </Typography>
             </Box>
           </Card>

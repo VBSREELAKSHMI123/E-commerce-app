@@ -1,4 +1,4 @@
-import CartView from "@/ComponentLibrary/CartView";
+import CartView from "@/ComponentLibrary/cart/CartView";
 import React from "react";
 
 const page = () => {

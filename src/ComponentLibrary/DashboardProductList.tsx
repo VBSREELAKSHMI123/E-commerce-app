@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import {
   Box,
   Button,
@@ -37,7 +38,16 @@ const DashboardProductList = () => {
 
   return (
     <>
-      <Box sx={{ m: 5, overflowX: "auto", whiteSpace: "nowrap" }}>
+      <Box sx={{ borderLeft: 1, bgcolor: "#DB4444", width: 8 }}>
+        <Box
+          component="span"
+          sx={{ fontSize: "16px", color: "#DB4444", fontWeight: 600, ml: 2 }}
+        >
+          Today
+        </Box>
+      </Box>
+      <Box sx={{ m: 1, overflowX: "auto", whiteSpace: "nowrap" }}>
+     
         <Box sx={{ display: "flex", gap: 2 }}>
           {productitems.map((product) => {
             const isWishList = wishlist.find((item) => item.id === product.id);
@@ -87,7 +97,6 @@ const DashboardProductList = () => {
                 >
                   <CardMedia
                     component="img"
-                    
                     image={product.image || product.thumbnail}
                     alt={product.title}
                     sx={{
@@ -107,22 +116,15 @@ const DashboardProductList = () => {
                     ₹ {product.price}
                   </Typography>
                   <Box sx={{ display: "flex", alignItems: "center", mt: 1 }}>
-                    <Rating
-                      value={
-                        typeof product.rating === "number"
-                          ? product.rating
-                          : product.rating.rate
-                      }
-                      readOnly
-                    />
-                    <Typography variant="body2" sx={{ ml: 1 }}>
+                    <Rating value={product.rating} readOnly />
+                    {/* <Typography variant="body2" sx={{ ml: 1 }}>
                       (
                       {typeof product.rating === "object" &&
                       product.rating.count
                         ? `(${product.rating.count})`
                         : ""}
                       )
-                    </Typography>
+                    </Typography> */}
                   </Box>
                 </CardContent>
                 <CardActions sx={{ p: 2, pt: 0 }}>

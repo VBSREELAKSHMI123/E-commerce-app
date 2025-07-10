@@ -1,5 +1,5 @@
 "use client";
-import InputField from "@/sharedComponents/InputField";
+import InputField from "@/sharedComponents/InputField";import React from "react";
 import {
   Box,
   FormControlLabel,
@@ -8,7 +8,7 @@ import {
   RadioGroup,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import {  useSelector } from "react-redux";
@@ -94,8 +94,7 @@ const Checkout = () => {
         <Box
           component="form"
           sx={{ display: "flex", flexDirection: "column" }}
-          onSubmit={formik.handleSubmit}
-        >
+          onSubmit={formik.handleSubmit}>
           <InputField
             variant="filled"
             label="Name"

@@ -6,7 +6,7 @@ interface ProductType {
   price: number;
   image?: string;
   thumbnail?: string;
-  rating: number | { rate: number; count?: number };
+  rating: number ;
 }
 
 interface ProductState {

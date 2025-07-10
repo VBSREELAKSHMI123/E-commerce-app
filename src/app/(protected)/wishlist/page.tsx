@@ -1,4 +1,4 @@
-import WishlistView from "@/ComponentLibrary/WishlistView";
+import WishlistView from "@/ComponentLibrary/wishlist/WishlistView";
 import React from "react";
 
 const page = () => {

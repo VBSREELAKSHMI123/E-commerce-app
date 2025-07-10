@@ -1,6 +1,6 @@
 "use client";
-import ProductButton from "@/sharedComponents/Button";
-import InputField from "@/sharedComponents/InputField";
+import ProductButton from "../../sharedComponents/Button";
+import InputField from "../../sharedComponents/InputField";
 import { Box, Divider, Typography } from "@mui/material";
 import React from "react";
 import { IoCall } from "react-icons/io5";
@@ -16,7 +16,6 @@ const ContactUs = () => {
       }}
     >
       <Box sx={{ display: "flex", gap: 3, alignItems: "stretch" }}>
-        {/* container 1 */}
         <Box
           sx={{
             display: "flex",
@@ -28,7 +27,7 @@ const ContactUs = () => {
             boxSizing: "border-box",
           }}
         >
-          <Box sx={{ display: "flex", gap: 2 }}>
+          <Box sx={{ display: "flex", gap: 1 }}>
             <Typography sx={{ color: "#DB4444" }}>
               <IoCall />
             </Typography>
@@ -45,19 +44,19 @@ const ContactUs = () => {
             <Typography sx={{ color: "#DB4444" }}>
               <MdEmail />
             </Typography>
-            <Typography variant="body2">Write To US</Typography>
+            <Typography variant="body2">Write To Us</Typography>
           </Box>
           <Typography sx={{ fontSize: "small", mb: 1 }}>
             Fill out our form and we will contact
           </Typography>
           <Typography sx={{ fontSize: "small", mb: 1 }}>
-            Emails: customer@exclusive.com
+            Email: customer@exclusive.com
           </Typography>
           <Typography sx={{ fontSize: "small", mb: 1 }}>
-            Emails: support@exclusive.com
+            Email: support@exclusive.com
           </Typography>
         </Box>
-        {/* container 2 */}
+
         <Box
           sx={{
             display: "flex",
@@ -77,7 +76,7 @@ const ContactUs = () => {
               margin="dense"
               sx={{
                 "& .MuiInputBase-root": {
-                  height: 36,
+                  // height: 36,
                   fontSize: "0.85rem",
                 },
                 "& .MuiInputBase-root:before": {
@@ -95,7 +94,7 @@ const ContactUs = () => {
               margin="dense"
               sx={{
                 "& .MuiInputBase-root": {
-                  height: 36,
+                  // height: 36,
                   fontSize: "0.85rem",
                 },
                 "& .MuiInputBase-root:before": {
@@ -110,7 +109,7 @@ const ContactUs = () => {
               margin="dense"
               sx={{
                 "& .MuiInputBase-root": {
-                  height: 36,
+                  // height: 36,
                   fontSize: "0.85rem",
                 },
                 "& .MuiInputBase-root:before": {
@@ -131,7 +130,11 @@ const ContactUs = () => {
               }}
             />
           </Box>
-          <Box sx={{mt:2}}><ProductButton color="#DB4444" textcolor="white">send message</ProductButton></Box>
+          <Box sx={{ mt: 2 }}>
+            <ProductButton color="#DB4444" textcolor="white">
+              send message
+            </ProductButton>
+          </Box>
         </Box>
       </Box>
     </Box>

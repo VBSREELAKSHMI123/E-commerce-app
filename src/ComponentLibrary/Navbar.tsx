@@ -82,7 +82,7 @@ export default function Navbar() {
         >
           <Toolbar sx={{ gap: 5, minHeight: 40, height: 40 }}>
             <Typography variant="h6" noWrap sx={{ color: "black" }}>
-              Exclusive
+              <b>Shop</b>Fusion
             </Typography>
             <Box
               sx={{
@@ -247,6 +247,14 @@ export default function Navbar() {
                   }}
                 >
                   Cart
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    handleMenuClose();
+                    router.push("/orderhistory");
+                  }}
+                >
+                  Orders
                 </MenuItem>
                 <MenuItem
                   onClick={() => {

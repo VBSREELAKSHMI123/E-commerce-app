@@ -16,7 +16,7 @@ interface ProductType {
   image?: string;
   thumbnail?: string;
   description: string;
-  rating: number | { rate: number; count?: number };
+  rating: number ;
 }
 
 const ProductDetails = () => {
@@ -106,20 +106,16 @@ const ProductDetails = () => {
           </Box>
           <Box sx={{ display: "flex", alignItems: "center", mt: 1 }}>
             <Rating
-              value={
-                typeof product?.rating === "number"
-                  ? product?.rating
-                  : product?.rating.rate
-              }
+              value={product?.rating}
               readOnly
             />
-            <Typography variant="body2" sx={{ ml: 1 }}>
+            {/* <Typography variant="body2" sx={{ ml: 1 }}>
               (
               {typeof product?.rating === "object" && product?.rating.count
                 ? `(${product?.rating.count})`
                 : ""}
               )
-            </Typography>
+            </Typography> */}
           </Box>
           <Box>
             <Typography variant="body1" sx={{ mt: 1 }}>

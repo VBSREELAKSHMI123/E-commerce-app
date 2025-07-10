@@ -1,4 +1,5 @@
 'use client';
+import React from "react";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -40,7 +41,7 @@ export default function Sidebar() {
             <ListItemIcon sx={{ minWidth: 36 }}>
               <GiAmpleDress />
             </ListItemIcon>
-            <ListItemText>Woman’s Fashion</ListItemText>
+            <ListItemText>Women’s Fashion</ListItemText>
           </ListItemButton>
           <ListItemButton onClick={() => handleSearch("men")}>
             <ListItemIcon sx={{ minWidth: 36 }}>

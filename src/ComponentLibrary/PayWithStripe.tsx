@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 
 type PayWithStripeProps = {
     amount: number;
