@@ -36,12 +36,12 @@ export default function SignUpPage() {
   });
 
   return (
-    <Box sx={{ display: "flex", height: "100vh" }}>
+    <Box sx={{ display: "flex", height: "100vh", overflow: "hidden" }}>
       <Box
         component="img"
         src="/images/Signup_image.png"
         alt="signup"
-        sx={{ maxHeight: 500, flex: 1 }}
+        sx={{ maxHeight: 450, flex: 1, ml: 2, mt: 5, maxWidth: 500 }}
       />
 
       <Box
@@ -70,7 +70,10 @@ export default function SignUpPage() {
           </Typography>
           <InputField
             placeholder="Name"
-            sx={{ mb: 4, input: { color: "gray" } }}
+            sx={{
+              mb: formik.touched.name && formik.errors.name ? 1 : 4,
+              input: { color: "gray" },
+            }}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.name}
@@ -84,7 +87,10 @@ export default function SignUpPage() {
           )}
           <InputField
             placeholder="Email"
-            sx={{ mb: 4, input: { color: "gray" } }}
+            sx={{
+              mb: formik.touched.email && formik.errors.email ? 1 : 4,
+              input: { color: "gray" },
+            }}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.email}
@@ -98,7 +104,10 @@ export default function SignUpPage() {
           )}
           <InputField
             placeholder="Password"
-            sx={{ mb: 4, input: { color: "gray" } }}
+            sx={{
+              mb: formik.touched.password && formik.errors.password ? 1 : 4,
+              input: { color: "gray" },
+            }}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.password}
@@ -122,7 +131,7 @@ export default function SignUpPage() {
               Already have account?
             </Box>
             <Box component="div" sx={{ display: "inline", ml: 2 }}>
-              <Link href="/signin" underline="none" color="black">
+              <Link href="/signin" sx={{ color: "#000000" }}>
                 Log in
               </Link>
             </Box>

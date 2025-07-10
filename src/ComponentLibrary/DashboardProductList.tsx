@@ -63,6 +63,7 @@ const DashboardProductList = () => {
                   position: "relative",
                   ":hover": { transform: "scale(1.03)", boxShadow: 3 },
                   bgcolor: "#efefef",
+                  cursor:"pointer"
                 }}
                 onClick={() => router.push(`/products/${product.id}`)}
               >
