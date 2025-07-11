@@ -19,12 +19,12 @@ import {
   Typography,
   Rating,
   CardActions,
-  Button,
   IconButton,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./redux/store";
 import { useRouter } from "next/navigation";
+import ProductButton from "@/sharedComponents/Button";
 
 interface ProductType {
   id: number;
@@ -41,6 +41,7 @@ export default function ProductView() {
   const wishlist =
     useSelector((state: RootState) => state.wishlist.items) ?? [];
   const router = useRouter();
+  const cartItems = useSelector((state: RootState) => state.cart.item);
 
   useEffect(() => {
     axios
@@ -71,6 +72,8 @@ export default function ProductView() {
     >
       {products.map((product) => {
         const isWishList = wishlist.find((item) => item.id === product.id);
+        const isCart = cartItems.some((item) => item.id === product.id);
+
 
         return (
           <Card
@@ -82,6 +85,7 @@ export default function ProductView() {
               height: "100%",
               position: "relative",
               ":hover": { transform: "scale(1.03)", boxShadow: 3 },
+              cursor:"pointer"
             }}
           >
             <IconButton
@@ -126,18 +130,25 @@ export default function ProductView() {
               </Box>
             </CardContent>
             <CardActions sx={{ p: 2, pt: 0 }}>
-              <Button
-                variant="contained"
-                sx={{ color: "white", bgcolor: "black" }}
-                fullWidth
+              <ProductButton
+                color={isCart ? "white" : "black"}
+                textcolor={isCart ? "black" : "white"}
                 onClick={(e) => {
                   e.stopPropagation();
-                  dispatch(addToCart(product));
+                  if (!isCart) {
+                    dispatch(addToCart(product));
+                  }
+                }}
+                sx={{
+                  border: isCart ? "1px solid black" : "none",
+                  bgcolor: isCart ? "white" : "black",
+                  color: isCart ? "black" : "white",
+                  cursor: isCart ? "not-allowed" : "pointer",
                 }}
               >
                 <IoCartOutline size={20} style={{ marginRight: 8 }} />
-                Add to Cart
-              </Button>
+                {isCart ? "Added to Cart" : "Add to Cart"}
+              </ProductButton>
             </CardActions>
           </Card>
         );

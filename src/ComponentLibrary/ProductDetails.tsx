@@ -1,7 +1,10 @@
 "use client";
 import ProductButton from "@/sharedComponents/Button";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
-import { addToWishlist,removeFromWishlist } from "./redux/slices/WishlistReducer";
+import {
+  addToWishlist,
+  removeFromWishlist,
+} from "./redux/slices/WishlistReducer";
 import {
   Box,
   Divider,
@@ -19,7 +22,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../ComponentLibrary/redux/slices/CartReducer";
 import { RootState } from "./redux/store";
-
+import { IoCartOutline } from "react-icons/io5";
 
 interface ProductType {
   id: number;
@@ -36,8 +39,11 @@ const ProductDetails = () => {
   const params = useParams();
   const id = params.id;
   const dispatch = useDispatch();
-  const wishlist = useSelector((state:RootState)=>state.wishlist.items)
-
+  const wishlist = useSelector((state: RootState) => state.wishlist.items);
+  const cartItems = useSelector((state: RootState) => state.cart.item);
+  const isCart = product
+    ? cartItems.some((item) => item.id === product.id)
+    : false;
 
   const fetchProduct = async (id: string) => {
     const response = await axios.get(`https://dummyjson.com/products/${id}`);
@@ -124,13 +130,6 @@ const ProductDetails = () => {
               precision={0.5}
               readOnly
             />
-            {/* <Typography variant="body2" sx={{ ml: 1 }}>
-              (
-              {typeof product?.rating === "object" && product?.rating.count
-                ? `(${product?.rating.count})`
-                : ""}
-              )
-            </Typography> */}
           </Box>
           <Box>
             <Typography variant="body1" sx={{ mt: 1 }}>
@@ -220,15 +219,22 @@ const ProductDetails = () => {
 
               <Box>
                 <ProductButton
-                  color="black"
-                  textcolor="white"
+                  color={isCart ? "white" : "black"}
+                  textcolor={isCart ? "black" : "white"}
                   onClick={() => {
-                    if (product) {
+                    if (product && !isCart) {
                       dispatch(addToCart(product));
                     }
                   }}
+                  sx={{
+                    border: isCart ? "1px solid black" : "none",
+                    bgcolor: isCart ? "white" : "black",
+                    color: isCart ? "black" : "white",
+                    cursor: isCart ? "not-allowed" : "pointer",
+                  }}
                 >
-                  Add to Cart
+                  <IoCartOutline size={20} style={{ marginRight: 8 }} />
+                  {isCart ? "Added to Cart" : "Add to Cart"}
                 </ProductButton>
               </Box>
 
@@ -248,14 +254,13 @@ const ProductDetails = () => {
                         : addToWishlist(product)
                     );
                   }}
-                  sx={{color:"black"}}
+                  sx={{ color: "black" }}
                 >
                   {wishlist.some((item) => item.id === product.id) ? (
                     <Favorite />
                   ) : (
                     <FavoriteBorder />
                   )}
-                  
                 </IconButton>
               )}
             </Box>
