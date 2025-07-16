@@ -211,6 +211,7 @@ export default function Navbar() {
                     size={20}
                     cursor="pointer"
                     onClick={() => router.push("/cartlist")}
+                    data-testid="cart-icon"
                   />
                 </Box>
               </Box>

@@ -1,11 +1,11 @@
 "use client";
-import React from 'react'
+import React from "react";
 import { Box, Link, Typography } from "@mui/material";
-import InputField from "../sharedComponents/InputField";
-import ProductButton from "../sharedComponents/Button";
+import InputField from "../../sharedComponents/InputField";
+import ProductButton from "../../sharedComponents/Button";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { registerSuccess } from "./redux/slices/RegisterReducer";
+import { registerSuccess } from "../redux/slices/RegisterReducer";
 import { useDispatch } from "react-redux";
 import { FcGoogle } from "react-icons/fc";
 
