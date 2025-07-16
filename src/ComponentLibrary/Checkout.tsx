@@ -54,30 +54,6 @@ const Checkout = () => {
     },
   });
 
-  // const handlePlaceOrder = () => {
-  //   if (cartitems.length === 0) {
-  //     return;
-  //   }
-
-  //   dispatch(
-  //     placeOrder({
-  //       items: cartitems,
-  //       customers:
-  //         {
-  //           name: formik.values.name,
-  //           address: formik.values.address,
-  //           city: formik.values.city,
-  //           phone: formik.values.phone,
-  //           email: formik.values.email,
-  //         },
-
-  //     })
-  //   );
-  //   alert("Place Order")
-  //   dispatch(clearCart());
-
-  // };
-
   useEffect(() => {
     sessionStorage.setItem("customerInfo", JSON.stringify(formik.values));
     sessionStorage.setItem("cartItems", JSON.stringify(cartitems));
@@ -94,7 +70,8 @@ const Checkout = () => {
         <Box
           component="form"
           sx={{ display: "flex", flexDirection: "column" }}
-          onSubmit={formik.handleSubmit}>
+          onSubmit={formik.handleSubmit}
+        >
           <InputField
             variant="filled"
             label="Name"
@@ -105,6 +82,7 @@ const Checkout = () => {
             onBlur={formik.handleBlur}
             value={formik.values.name}
             name="name"
+            data-testid="checkout-name"
           />
           {formik.touched.name && formik.errors.name && (
             <Typography variant="body2" sx={{ color: "#DB4444" }}>
@@ -121,6 +99,7 @@ const Checkout = () => {
             onBlur={formik.handleBlur}
             value={formik.values.address}
             name="address"
+            data-testid="checkout-address"
           />
           {formik.touched.address && formik.errors.address && (
             <Typography variant="body2" sx={{ color: "#DB4444" }}>
@@ -137,6 +116,7 @@ const Checkout = () => {
             onBlur={formik.handleBlur}
             value={formik.values.city}
             name="city"
+            data-testid="checkout-city"
           />
           {formik.touched.city && formik.errors.city && (
             <Typography variant="body2" sx={{ color: "#DB4444" }}>
@@ -153,6 +133,7 @@ const Checkout = () => {
             onBlur={formik.handleBlur}
             value={formik.values.phone}
             name="phone"
+            data-testid="checkout-phone"
           />
           {formik.touched.phone && formik.errors.phone && (
             <Typography variant="body2" sx={{ color: "#DB4444" }}>
@@ -169,6 +150,7 @@ const Checkout = () => {
             onBlur={formik.handleBlur}
             value={formik.values.email}
             name="email"
+            data-testid="checkout-email"
           />
           {formik.touched.email && formik.errors.email && (
             <Typography variant="body2" sx={{ color: "#DB4444" }}>
@@ -273,7 +255,7 @@ const Checkout = () => {
             </RadioGroup>
           </Box>
 
-          <PayWithStripe amount={totalAmount * 100} name="Cart Total" />
+          <PayWithStripe amount={totalAmount * 100} name="Cart Total" data-testid="checkout-stripe"/>
         </Box>
       </Box>
     </Box>
