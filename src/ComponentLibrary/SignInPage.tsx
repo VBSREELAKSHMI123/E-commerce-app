@@ -40,7 +40,7 @@ export default function SignInPage() {
         component="img"
         src="/images/Signup_image.png"
         alt="signup"
-        sx={{ maxHeight: 450, flex: 1, maxWidth: 500,mt:5,ml:2 }}
+        sx={{ maxHeight: 450, flex: 1, maxWidth: 500, mt: 5, ml: 2 }}
       />
 
       <Box
@@ -71,12 +71,16 @@ export default function SignInPage() {
           <InputField
             defaultValue="Email or Phone Number"
             placeholder="Email"
-            sx={{  mb: formik.touched.email && formik.errors.email ? 1 : 4, input: { color: "gray" } }}
+            sx={{
+              mb: formik.touched.email && formik.errors.email ? 1 : 4,
+              input: { color: "gray" },
+            }}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.email}
             name="email"
             variant="standard"
+            data-testid="email-field"
           />
           {formik.touched.email && formik.errors.email && (
             <Typography variant="body2" sx={{ color: "#DB4444" }}>
@@ -86,12 +90,16 @@ export default function SignInPage() {
           <InputField
             defaultValue="Password"
             placeholder="Password"
-            sx={{ mb: formik.touched.email && formik.errors.email ? 1 : 4, input: { color: "gray" } }}
+            sx={{
+              mb: formik.touched.email && formik.errors.email ? 1 : 4,
+              input: { color: "gray" },
+            }}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.password}
             name="password"
             variant="standard"
+            data-testid="password-field"
           />
           {formik.touched.password && formik.errors.password && (
             <Typography variant="body2" sx={{ color: "#DB4444" }}>
@@ -105,7 +113,7 @@ export default function SignInPage() {
               alignItems: "center",
             }}
           >
-            <ProductButton color="#DB4444" textcolor="white" type="submit">
+            <ProductButton color="#DB4444" textcolor="white" type="submit" data-testid="login-button">
               Log In
             </ProductButton>
             <Typography variant="body2" sx={{ color: "#DB4444" }}>
