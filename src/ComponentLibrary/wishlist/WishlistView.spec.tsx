@@ -15,7 +15,7 @@ const sampleProduct: ProductType = {
 };
 
 describe('WishlistView', () => {
-    it('shows empty list message when there is nothing to displa', () => {
+    it('shows empty list message when there is nothing to display', () => {
         const store = mockStore({
             wishlist: {
                 items : []

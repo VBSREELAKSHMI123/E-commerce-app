@@ -85,7 +85,7 @@ export default function ProductView() {
               height: "100%",
               position: "relative",
               ":hover": { transform: "scale(1.03)", boxShadow: 3 },
-              cursor:"pointer"
+              cursor: "pointer",
             }}
           >
             <IconButton
@@ -131,6 +131,7 @@ export default function ProductView() {
             </CardContent>
             <CardActions sx={{ p: 2, pt: 0 }}>
               <ProductButton
+                data-testid="cart-button"
                 color={isCart ? "white" : "black"}
                 textcolor={isCart ? "black" : "white"}
                 onClick={(e) => {
@@ -148,6 +149,7 @@ export default function ProductView() {
               >
                 <IoCartOutline size={20} style={{ marginRight: 8 }} />
                 {isCart ? "Added to Cart" : "Add to Cart"}
+                
               </ProductButton>
             </CardActions>
           </Card>

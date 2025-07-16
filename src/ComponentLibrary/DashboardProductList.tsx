@@ -26,8 +26,6 @@ import React from 'react'
 const DashboardProductList = () => {
   const router = useRouter();
   const productitems: ProductType[] = useSelector((state: RootState) => state.products.product) || [];
-  
-
   console.log("productitems from Redux:", productitems);
   console.log("Is Array:", Array.isArray(productitems));
   const wishlist = useSelector((state: RootState) => state.wishlist.items) ?? [];
@@ -48,7 +46,6 @@ const DashboardProductList = () => {
         </Box>
       </Box>
       <Box sx={{ m: 1, overflowX: "auto", whiteSpace: "nowrap" }}>
-     
         <Box sx={{ display: "flex", gap: 2 }}>
           {productitems.map((product) => {
             const isWishList = wishlist.find((item) => item.id === product.id);
@@ -125,10 +122,11 @@ const DashboardProductList = () => {
                 </CardContent>
                 <CardActions sx={{ p: 2, pt: 0 }}>
                   <ProductButton
+                    
                     color={isCart ? "white" : "black"}
                     textcolor={isCart ? "black" : "white"}
                     onClick={(e) => {
-                      e.stopPropagation(); 
+                      e.stopPropagation();
                       if (!isCart) {
                         dispatch(addToCart(product));
                       }
@@ -156,6 +154,7 @@ const DashboardProductList = () => {
           color="#DB4444"
           textcolor="white"
           onClick={() => router.push("/productlist")}
+          data-testid="product-button"
         >
           view products
         </ProductButton>

@@ -14,9 +14,9 @@ const AuthGaurd = ({ children }: { children: React.ReactNode }) => {
   const dispatch = useDispatch();
   const pathname = usePathname();
   const router = useRouter();
-  console.log("✅ AuthGuard loaded");
-  console.log("🔐 Authenticated:", authState);
-  console.log("🌍 Current Path:", pathname);
+  console.log("AuthGuard loaded");
+  console.log("Authenticated:", authState);
+  console.log("Current Path:", pathname);
 
   useEffect(() => {
     if (!authState) {
