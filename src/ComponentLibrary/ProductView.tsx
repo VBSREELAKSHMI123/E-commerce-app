@@ -116,7 +116,11 @@ export default function ProductView() {
               sx={{ objectFit: "contain", p: 2 }}
             />
             <CardContent sx={{ flexGrow: 1 }}>
-              <Typography variant="subtitle1" noWrap>
+              <Typography
+                variant="subtitle1"
+                noWrap
+                data-testid="product-title"
+              >
                 {product.title}
               </Typography>
               <Typography variant="body1" sx={{ mt: 1 }}>
@@ -149,7 +153,6 @@ export default function ProductView() {
               >
                 <IoCartOutline size={20} style={{ marginRight: 8 }} />
                 {isCart ? "Added to Cart" : "Add to Cart"}
-                
               </ProductButton>
             </CardActions>
           </Card>
