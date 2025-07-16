@@ -2,16 +2,17 @@
 import React from "react";
 
 type PayWithStripeProps = {
-    amount: number;
-    name: string;
+  amount: number;
+  name: string;
+  "data-testid"?: string;
 };
 
-export default function PayWithStripe({ amount,name }: PayWithStripeProps) {
+export default function PayWithStripe({amount,name,"data-testid": dataTestId,}: PayWithStripeProps) {
   const handleClick = async () => {
     const res = await fetch("/api/create-checkout-session", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ amount,name }),
+      body: JSON.stringify({ amount, name }),
     });
 
     const data = await res.json();
@@ -26,6 +27,7 @@ export default function PayWithStripe({ amount,name }: PayWithStripeProps) {
   return (
     <button
       onClick={handleClick}
+      data-testid={dataTestId}
       style={{
         padding: "12px 24px",
         backgroundColor: "#DB4444",
