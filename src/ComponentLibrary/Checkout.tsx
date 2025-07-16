@@ -1,5 +1,6 @@
 "use client";
-import InputField from "@/sharedComponents/InputField";import React from "react";
+import InputField from "@/sharedComponents/InputField";
+import React from "react";
 import {
   Box,
   FormControlLabel,
@@ -8,10 +9,10 @@ import {
   RadioGroup,
   Typography,
 } from "@mui/material";
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { ProductType } from "./redux/slices/CartReducer";
 import { RootState } from "./redux/store";
 import Image from "next/image";
@@ -36,8 +37,6 @@ const Checkout = () => {
     (state: RootState) => state.cart.item
   );
   const totalAmount = cartitems.reduce((acc, item) => acc + item.price, 0);
-
-
 
   const formik = useFormik({
     initialValues: {
@@ -255,7 +254,11 @@ const Checkout = () => {
             </RadioGroup>
           </Box>
 
-          <PayWithStripe amount={totalAmount * 100} name="Cart Total" data-testid="checkout-stripe"/>
+          <PayWithStripe
+            amount={totalAmount * 100}
+            name="Cart Total"
+            data-testid="checkout-stripe"
+          />
         </Box>
       </Box>
     </Box>

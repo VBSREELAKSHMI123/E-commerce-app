@@ -24,11 +24,12 @@ describe('Add to Cart', () => {
         cy.contains(productTitle).should("exist");
         cy.get('[data-testid="checkout-button"]').should("exist")
         cy.contains("Checkout").click();
-        cy.get('[data-testid="checkout-name"]').should("exist").type("sreelakshmi")
-        cy.get('[data-testid="checkout-address"]').should("exist").type("viyyath house")
-        cy.get('[data-testid="checkout-city"]').should("exist").type("thrissur")
-        cy.get('[data-testid="checkout-phone"]').should("exist").type("8606660873")
-        cy.get('[data-testid="checkout-email"]').should("exist").type("sreelakshmi@gmail.com")
+        cy.url().should('include','/checkout')
+        cy.get('[data-testid="checkout-name"]', { timeout: 10000 }).type("sreelakshmi");
+        cy.get('[data-testid="checkout-address"]').type("viyyath house")
+        cy.get('[data-testid="checkout-city"]').type("thrissur")
+        cy.get('[data-testid="checkout-phone"]').type("8606660873")
+        cy.get('[data-testid="checkout-email"]').type("sreelakshmi@gmail.com")
         cy.get('[data-testid="checkout-stripe"]').should("exist")
       }); 
   });
