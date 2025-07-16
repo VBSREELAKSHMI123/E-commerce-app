@@ -104,6 +104,7 @@ export default function SignUpPage() {
           )}
           <InputField
             placeholder="Password"
+            
             sx={{
               mb: formik.touched.password && formik.errors.password ? 1 : 4,
               input: { color: "gray" },
