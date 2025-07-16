@@ -21,17 +21,17 @@ import { useRouter } from "next/navigation";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import { IoCartOutline } from "react-icons/io5";
 import ProductButton from "../sharedComponents/Button";
-import React from 'react'
+import React from "react";
 
 const DashboardProductList = () => {
   const router = useRouter();
-  const productitems: ProductType[] = useSelector((state: RootState) => state.products.product) || [];
+  const productitems: ProductType[] =
+    useSelector((state: RootState) => state.products.product) || [];
   console.log("productitems from Redux:", productitems);
   console.log("Is Array:", Array.isArray(productitems));
-  const wishlist = useSelector((state: RootState) => state.wishlist.items) ?? [];
-  const cartItems = useSelector((state: RootState) => state.cart.item)
-  
- 
+  const wishlist =
+    useSelector((state: RootState) => state.wishlist.items) ?? [];
+  const cartItems = useSelector((state: RootState) => state.cart.item);
 
   const dispatch = useDispatch();
 
@@ -122,7 +122,6 @@ const DashboardProductList = () => {
                 </CardContent>
                 <CardActions sx={{ p: 2, pt: 0 }}>
                   <ProductButton
-                    
                     color={isCart ? "white" : "black"}
                     textcolor={isCart ? "black" : "white"}
                     onClick={(e) => {
@@ -154,8 +153,7 @@ const DashboardProductList = () => {
           color="#DB4444"
           textcolor="white"
           onClick={() => router.push("/productlist")}
-          data-testid="product-button"
-        >
+          data-testid="product-button">
           view products
         </ProductButton>
       </Box>

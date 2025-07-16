@@ -22,6 +22,7 @@ const CartView = () => {
       <Box sx={{ position: "relative", mt: 5 }}>
         <Box sx={{ position: "absolute", top: 0, right: 15 }}>
           <ProductButton
+            data-testid="checkout-button"
             textcolor="white"
             color="#DB4444"
             onClick={() => router.push("/checkout")}
@@ -98,13 +99,6 @@ const CartView = () => {
                 </Typography>
                 <Box sx={{ display: "flex", alignItems: "center", mt: 1 }}>
                   <Rating value={items.rating} readOnly />
-                  {/* <Typography variant="body2" sx={{ ml: 1 }}>
-                    (
-                    {typeof items.rating === "object" && items.rating.count
-                      ? `(${items.rating.count})`
-                      : ""}
-                    )
-                  </Typography> */}
                 </Box>
               </CardContent>
             </Card>
