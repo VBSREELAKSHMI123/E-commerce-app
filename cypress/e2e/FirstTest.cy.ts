@@ -31,6 +31,18 @@ describe('Add to Cart', () => {
         cy.get('[data-testid="checkout-phone"]').type("8606660873")
         cy.get('[data-testid="checkout-email"]').type("sreelakshmi@gmail.com")
         cy.get('[data-testid="checkout-stripe"]').should("exist")
-      }); 
+        
+      });
+    
+    cy.intercept('POST', '/api/create-checkout-session', {
+          statusCode: 200,
+          body:{url:'https://checkout.stripe.com/test-session-id'}
+    }).as('stripeSession')
+    cy.window().then((win) => {
+      cy.stub(win.location,'href').as('redirect')
+    })
+    cy.get('[data-testid="checkout-stripe"]').click();
+    cy.wait('@stripeSession')
+    cy.get('@redirect').should('eq', 'https://checkout.stripe.com/test-session-id')
   });
 });
